@@ -6,19 +6,34 @@ function generatePassword($length) {
 
     session_start();
     
-    $characters = 'qwertyuiopasdfghjklzxcvbnm1234567890';
-    $charactersSplit = str_split($characters);
+    $letters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+    $numbers = '1234567890';
+    $symbols = '!?$%&/^@#*';
     $password = "";
-    
+    $characters = '';
+
+    $_GET['letters'] && $characters .= $letters;
+    $_GET['numbers'] && $characters .= $numbers;
+    $_GET['symbols'] && $characters .= $symbols;
+
     for ($i=0; $i < $length; $i++) { 
-        
-        $password .= $characters[rand(0, count($charactersSplit))];
+        $randomCharacter = $characters[rand(0, strlen($characters))];
+        if (!$_GET['repetitions']) {
+            if (!str_contains($password, $randomCharacter)) {
+                $password .= $randomCharacter;
+            }
+        } else {
+            $password .= $randomCharacter;
+        }
     }
 
     $_SESSION['password-generated'] = $password;
-    echo $password;
 
-    header('Location: success.php');
+    if ($password)  {
+        header('Location: success.php');
+    } else {
+        echo 'Compila il form';
+    }
 }
 
 ?>

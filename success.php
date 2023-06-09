@@ -16,10 +16,10 @@ session_start();
 ?>
 
 <body class="d-flex justify-content-center align-items-center bg-dark text-white">
-    <main class="d-flex flex-column align-items-center gap-3 w-25">
+    <main class="d-flex flex-column align-items-center gap-3 min-w-50">
         <h1 class="text-secondary text-center">Strong Password Generator</h1>
         <h3>La tua password è:</h3>
-        <div class="my-result w-100 text-black py-4 px-5 rounded-3">
+        <div class="my-result w-100 text-black py-4 px-5 rounded-3 text-center">
             <?php echo $_SESSION['password-generated'] ?>
         </div>
     </main>
